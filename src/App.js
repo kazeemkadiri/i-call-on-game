@@ -15,7 +15,9 @@ function App() {
             <th>Animal</th>
             <th>Place</th>
             <th>Thing</th>
-            <Timer />
+            <th>
+              <Timer />
+            </th>
           </tr>
         </thead>
       </Table>
