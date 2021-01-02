@@ -8,6 +8,8 @@ import { Table, Button } from "react-bootstrap";
 import InputForm from "./components/InputForm";
 
 function App() {
+  const wordsApiUrl = "https://wordsapiv1.p.mashape.com/words/";
+
   const [startTimer, setStartTimer] = useState(false);
 
   const [currentGameLetter, setCurrentGameLetter] = useState("");
@@ -15,6 +17,19 @@ function App() {
   const alphabetsArr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   const inputFieldsArray = ["name", "animal", "place", "thing"];
+
+  const getUserInputs = ()=>{ return inputFieldsArray.map(inputField=>{
+      return document.querySelector(`#${currentGameLetter}-${inputField}`).value;
+    })};
+  
+  const calculateScores = ()=>{ 
+    const userInputs = getUserInputs();
+
+    userInputs.forEach( userInput => {
+      fetch(wordsApiUrl + userInput)
+      .then((res)=> alert(res));
+    })
+  };
 
   const enableInputFields = (alphabet) => {
     inputFieldsArray.forEach((inputFieldTitle) =>
@@ -55,6 +70,7 @@ function App() {
     setStartTimer(false);
     setCurrentGameLetter("");
     //calculate scores
+    calculateScores();
   };
 
   const renderer = ({ hours, minutes, seconds, completed }) => {
