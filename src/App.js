@@ -1,6 +1,6 @@
 import "./bootstrap.min.css";
 import "./App.css";
-import {useState} from "react";
+import { useState } from "react";
 
 import Countdown from "react-countdown";
 
@@ -8,22 +8,37 @@ import { Table, Button } from "react-bootstrap";
 import InputForm from "./components/InputForm";
 
 function App() {
+  const [startTimer, setStartTimer] = useState(false);
 
-  const [startTimer,setStartTimer] = useState(false);
-
-  const [currentGameLetter, setCurrentGameLetter] = useState('');
+  const [currentGameLetter, setCurrentGameLetter] = useState("");
 
   const alphabetsArr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
-  const enableInputFields = (alphabet)=>{
-        ["name","animal","place","thing"].forEach(inputFieldTitle => document.getElementById(`${alphabet}-${inputFieldTitle}`).removeAttribute('disabled'));
-  }
+  const inputFieldsArray = ["name", "animal", "place", "thing"];
 
- const disableInputFields = ()=>{
-        ["name","animal","place","thing"].forEach(inputFieldTitle => document.getElementById(`${currentGameLetter}-${inputFieldTitle}`).disabled=true);
-  }
+  const enableInputFields = (alphabet) => {
+    inputFieldsArray.forEach((inputFieldTitle) =>
+      document
+        .getElementById(`${alphabet}-${inputFieldTitle}`)
+        .removeAttribute("disabled")
+    );
+  };
 
-  const startGame = (alphabet)=>{
+  const disableInputFields = () => {
+    inputFieldsArray.forEach(
+      (inputFieldTitle) =>
+        (document.getElementById(
+          `${currentGameLetter}-${inputFieldTitle}`
+        ).disabled = true)
+    );
+  };
+
+  const disableGameButton = (button) => {
+    button.disabled = true;
+  };
+
+  const startGame = (e, alphabet) => {
+    disableGameButton(e.target);
     //Start timer
     setStartTimer(true);
 
@@ -31,22 +46,21 @@ function App() {
 
     //Enable all input fields
     enableInputFields(alphabet);
-}
+  };
 
-  const endGame = ()=>{
+  const endGame = () => {
     //resetTimer
     //disable input fields
     disableInputFields();
     setStartTimer(false);
-    setCurrentGameLetter('');
+    setCurrentGameLetter("");
     //calculate scores
-  }
+  };
 
-  const renderer = ({ hours, minutes, seconds, completed})=>{
+  const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       //End current game
       endGame();
-      alert("in renderer");
       return (
         <span>
           {hours}:{minutes}:{seconds}
@@ -58,8 +72,9 @@ function App() {
         <span>
           {hours}:{minutes}:{seconds}
         </span>
-    )}
-  }
+      );
+    }
+  };
 
   return (
     <div className="App container">
@@ -72,7 +87,11 @@ function App() {
             <th>Place</th>
             <th>Thing</th>
             <th>
-              { startTimer ? <Countdown renderer={renderer} date={Date.now() + 30000} /> : "00:00:30" }
+              {startTimer ? (
+                <Countdown renderer={renderer} date={Date.now() + 30000} />
+              ) : (
+                "00:00:30"
+              )}
             </th>
           </tr>
         </thead>
@@ -81,13 +100,29 @@ function App() {
             return (
               <tr key={alphabet}>
                 <td>
-                  <Button variant="warning" onClick={()=>startGame(alphabet)}>{alphabet}</Button>
+                  <Button
+                    variant="warning"
+                    onClick={(e) => startGame(e, alphabet)}
+                  >
+                    {alphabet}
+                  </Button>
                 </td>
                 <InputForm letter={alphabet} />
               </tr>
             );
           })}
-          	   <tr><td><Button variant="info" onClick={()=>{endGame()}}>Submit</Button></td></tr>
+          <tr>
+            <td>
+              <Button
+                variant="info"
+                onClick={() => {
+                  endGame();
+                }}
+              >
+                Submit
+              </Button>
+            </td>
+          </tr>
         </tbody>
       </Table>
     </div>
