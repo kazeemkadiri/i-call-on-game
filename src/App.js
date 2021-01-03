@@ -8,11 +8,13 @@ import { Table, Button } from "react-bootstrap";
 import InputForm from "./components/InputForm";
 
 function App() {
-  const wordsApiUrl = "https://wordsapiv1.p.mashape.com/words/";
+  const wordsApiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
   const [startTimer, setStartTimer] = useState(false);
 
   const [currentGameLetter, setCurrentGameLetter] = useState("");
+
+  const [scores, setScores] = useState(0);
 
   const alphabetsArr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -21,13 +23,18 @@ function App() {
   const getUserInputs = ()=>{ return inputFieldsArray.map(inputField=>{
       return document.querySelector(`#${currentGameLetter}-${inputField}`).value;
     })};
-  
+
+
   const calculateScores = ()=>{ 
     const userInputs = getUserInputs();
 
     userInputs.forEach( userInput => {
       fetch(wordsApiUrl + userInput)
-      .then((res)=> alert(res));
+      .then(res=>res.json())
+      .then((res)=>{
+        if(Object.keys(res).indexOf("title") === 0){return;}
+  	if(parseInt(Object.keys(res[0]).indexOf("word")) === 0 ){ setScores(prevScore => prevScore + 1) }
+      });
     })
   };
 
