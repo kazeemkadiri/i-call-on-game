@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Countdown from "react-countdown";
 
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Row, Col } from "react-bootstrap";
 import InputForm from "./components/InputForm";
 
 function App() {
@@ -101,7 +101,28 @@ function App() {
 
   return (
     <div className="App container">
-      <Table striped bordered hover size="sm">
+            <Row style={{position:"fixed", top:"10px"}} className="">
+ <Col className="d-flex ml-3 align-items-center justify-content-center px-2" style={{background:"rgba(0,0,0,0.4)",color:"white"}}>
+              {startTimer ? (
+                <Countdown renderer={renderer} date={Date.now() + 30000} />
+              ) : (
+                "00:00:30"
+              )}
+</Col>
+<Col>
+              <Button
+                variant="info"
+                onClick={() => {
+                  endGame();
+                }}
+              >
+                Submit
+              </Button>
+
+</Col>
+            </Row>
+
+      <Table striped bordered hover size="sm" className="mt-5">
         <thead>
           <tr>
             <th>Letters</th>
@@ -109,13 +130,6 @@ function App() {
             <th>Animal</th>
             <th>Place</th>
             <th>Thing</th>
-            <th>
-              {startTimer ? (
-                <Countdown renderer={renderer} date={Date.now() + 30000} />
-              ) : (
-                "00:00:30"
-              )}
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -134,18 +148,6 @@ function App() {
               </tr>
             );
           })}
-          <tr>
-            <td>
-              <Button
-                variant="info"
-                onClick={() => {
-                  endGame();
-                }}
-              >
-                Submit
-              </Button>
-            </td>
-          </tr>
         </tbody>
       </Table>
     </div>
