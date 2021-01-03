@@ -1,7 +1,8 @@
 import React from "react";
 
 const InputForm = ({ letter }) => {
-  const inputTitles = ["name", "animal", "place", "thing"];
+
+const inputTitles = ["name", "animal", "place", "thing"];
 
   const validateFirstLetter = (e) => {
     const userInput = e.target.value;
@@ -19,7 +20,9 @@ const InputForm = ({ letter }) => {
             type="text"
             name={`${letter}-${inputTitle}`}
             id={`${letter}-${inputTitle}`}
-            onChange={(e) => validateFirstLetter(e)}
+ 	    className="form-control"
+     	    style={{width:'20vw'}}
+            onChange={(e) => {validateFirstLetter(e);}}
             disabled
           />
         </td>
