@@ -93,7 +93,7 @@ function App() {
       // Render a countdown
       return (
         <span>
-          {hours}:{minutes}:{seconds}
+          0{hours}:0{minutes}:{seconds.toString().length === 1 ? `0${seconds}` : seconds}
         </span>
       );
     }
