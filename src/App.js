@@ -101,13 +101,16 @@ function App() {
 
   return (
     <div className="App container">
-            <Row style={{position:"fixed", top:"10px"}} className="">
- <Col className="d-flex ml-3 align-items-center justify-content-center px-2" style={{background:"rgba(0,0,0,0.4)",color:"white"}}>
+            <Row style={{position:"fixed", top:"10px", bottom:"10px"}}>
+ <Col className="ml-3" style={{height:"2rem", padding:"0.5rem", background:"rgba(0,0,0,0.4)",color:"white"}}>
               {startTimer ? (
                 <Countdown renderer={renderer} date={Date.now() + 30000} />
               ) : (
                 "00:00:30"
               )}
+</Col>
+<Col>
+              <div className="d-flex ml-3 align-items-center justify-content-center" style={{border:"2px solid black", height:"2rem", width:"8rem"}}>Scores: {scores}</div>
 </Col>
 <Col>
               <Button
