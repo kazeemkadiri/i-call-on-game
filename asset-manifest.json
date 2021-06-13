@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/i-call-on-game-/static/css/main.62e0eddb.chunk.css",
+    "main.js": "/i-call-on-game-/static/js/main.8ba33f84.chunk.js",
+    "main.js.map": "/i-call-on-game-/static/js/main.8ba33f84.chunk.js.map",
+    "runtime-main.js": "/i-call-on-game-/static/js/runtime-main.3bc98107.js",
+    "runtime-main.js.map": "/i-call-on-game-/static/js/runtime-main.3bc98107.js.map",
+    "static/js/2.ca509f66.chunk.js": "/i-call-on-game-/static/js/2.ca509f66.chunk.js",
+    "static/js/2.ca509f66.chunk.js.map": "/i-call-on-game-/static/js/2.ca509f66.chunk.js.map",
+    "index.html": "/i-call-on-game-/index.html",
+    "static/css/main.62e0eddb.chunk.css.map": "/i-call-on-game-/static/css/main.62e0eddb.chunk.css.map",
+    "static/js/2.ca509f66.chunk.js.LICENSE.txt": "/i-call-on-game-/static/js/2.ca509f66.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3bc98107.js",
+    "static/js/2.ca509f66.chunk.js",
+    "static/css/main.62e0eddb.chunk.css",
+    "static/js/main.8ba33f84.chunk.js"
+  ]
+}
